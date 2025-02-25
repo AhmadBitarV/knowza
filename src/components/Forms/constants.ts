@@ -8,6 +8,7 @@ export enum ErrorTypes {
   NoneExistingEmail = "noneExistingEmail",
   IncorrectPassword = "incorrectPassword",
   EmailAlreadyTaken = "emailAlreadyTaken",
+  Invalid = "invalid",
 }
 
 export const ERROR_MESSAGES = {
@@ -18,6 +19,7 @@ export const ERROR_MESSAGES = {
   emailAlreadyTaken: "This email address is already registered.",
   passwordsNoMatch: "Passwords don't match!",
   shortPassword: `Password must be at least ${PASSWORD_REQUIRED_LENGTH} characters.`,
+  invalid: "Invalid Email or Password",
 };
 
 export type SignUpErrors = {
@@ -39,8 +41,12 @@ export type LoginErrors = {
   email?:
     | ErrorTypes.Required
     | ErrorTypes.InvalidEmail
-    | ErrorTypes.NoneExistingEmail;
-  password?: ErrorTypes.Required;
+    | ErrorTypes.NoneExistingEmail
+    | ErrorTypes.Invalid;
+  password?:
+    | ErrorTypes.Required
+    | ErrorTypes.IncorrectPassword
+    | ErrorTypes.Invalid;
 };
 
 export type SignUpPayload = {

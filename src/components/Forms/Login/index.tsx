@@ -8,7 +8,7 @@ import { Button } from "../../Button";
 import IconEmail from "../../../assets/images/icon-email.svg";
 import IconPassword from "../../../assets/images/icon-password.svg";
 
-import { LoginErrors, LoginPayload } from "../constants";
+import { ErrorTypes, LoginErrors, LoginPayload } from "../constants";
 import { validateUserInput } from "./validateUserInput";
 
 export interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
@@ -51,11 +51,12 @@ export const LoginForm: React.FC<Props> = ({ action, ...props }) => {
 
       const data = await res.json();
 
-      if (data.errors) {
-        setErrors({ ...data.errors });
+      if (data.error) {
+        setErrors({ email: ErrorTypes.Invalid, password: ErrorTypes.Invalid });
+        formEl.current.reset();
+        formEl.current.querySelector("input")?.focus();
       }
     } catch (err) {
-      console.log({ err });
       throw new Error(err as string);
     }
   };

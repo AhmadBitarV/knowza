@@ -19,11 +19,13 @@ export const LoginPage: React.FC = () => {
             variant="heading-md"
             className="mb-2 text-grey-dark"
           />
+
           <Text
             text="Add your details below to get back into the app"
             variant="body-md"
             className="text-grey mb-10"
           />
+
           <LoginForm action="http://localhost:5000/login" />
         </div>
       </Section>
