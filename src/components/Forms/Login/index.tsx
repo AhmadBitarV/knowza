@@ -81,6 +81,9 @@ export const LoginForm: React.FC<Props> = ({ action, ...props }) => {
         onData={(_, value) => {
           setPayload({ email: value, password: payload?.password });
         }}
+        onChange={() => {
+          setErrors({ ...errors, email: undefined });
+        }}
       />
 
       <Input
@@ -93,6 +96,9 @@ export const LoginForm: React.FC<Props> = ({ action, ...props }) => {
         error={errors.password}
         onData={(_, value) => {
           setPayload({ email: payload?.email, password: value });
+        }}
+        onChange={() => {
+          setErrors({ ...errors, password: undefined });
         }}
       />
 

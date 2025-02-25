@@ -1,12 +1,7 @@
-import { isValidEmail } from '../../../utils/isEmailValid';
-import {
-  ErrorTypes,
-  LoginErrors,
-  PASSWORD_REQUIRED_LENGTH,
-  SignUpPayload,
-} from '../constants';
+import { isValidEmail } from "../../../utils/isEmailValid";
+import { ErrorTypes, LoginErrors, LoginPayload } from "../constants";
 
-export const validateUserInput = (payload: SignUpPayload) => {
+export const validateUserInput = (payload: LoginPayload) => {
   const errors: LoginErrors = {
     email: undefined,
     password: undefined,
@@ -22,10 +17,6 @@ export const validateUserInput = (payload: SignUpPayload) => {
 
   if (!payload.password) {
     errors.password = ErrorTypes.Required;
-  }
-
-  if (payload.password && payload.password.length < PASSWORD_REQUIRED_LENGTH) {
-    errors.password = ErrorTypes.ShortPassword;
   }
 
   return errors;

@@ -1,10 +1,10 @@
-import { isValidEmail } from '../../../utils/isEmailValid';
+import { isValidEmail } from "../../../utils/isEmailValid";
 import {
   ErrorTypes,
   SignUpErrors,
   PASSWORD_REQUIRED_LENGTH,
   SignUpPayload,
-} from '../constants';
+} from "../constants";
 
 export const validateUserInput = (payload: SignUpPayload) => {
   const errors: SignUpErrors = {
@@ -43,6 +43,14 @@ export const validateUserInput = (payload: SignUpPayload) => {
   if (payload.password !== payload.confirm_password) {
     errors.password = ErrorTypes.PasswordsNoMatch;
     errors.confirm_password = ErrorTypes.PasswordsNoMatch;
+  }
+
+  if (!payload.firstName) {
+    errors.firstName = ErrorTypes.Required;
+  }
+
+  if (!payload.lastName) {
+    errors.lastName = ErrorTypes.Required;
   }
 
   return errors;

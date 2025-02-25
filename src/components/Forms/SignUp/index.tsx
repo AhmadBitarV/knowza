@@ -26,12 +26,19 @@ export const SignUpForm: React.FC<Props> = ({ action, ...props }) => {
     email: "",
     password: "",
     confirm_password: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    login_automatically: false,
   });
 
   const [errors, setErrors] = useState<SignUpErrors>({
     email: undefined,
     password: undefined,
     confirm_password: undefined,
+    firstName: undefined,
+    lastName: undefined,
+    phoneNumber: undefined,
   });
 
   const onSubmitHandler = async (e: FormEvent, action: string) => {
@@ -78,7 +85,7 @@ export const SignUpForm: React.FC<Props> = ({ action, ...props }) => {
       <Input
         name="email"
         type="email"
-        label="Email address"
+        label="Email address *"
         placeholder="e.g. alex@email.com"
         autoComplete="email"
         icon={{ src: IconEmail, height: 16, width: 16 }}
@@ -91,9 +98,39 @@ export const SignUpForm: React.FC<Props> = ({ action, ...props }) => {
         }}
       />
 
+      <div className="flex flex-row gap-6">
+        <Input
+          name="firstName"
+          label="First Name *"
+          type="text"
+          placeholder="John"
+          error={errors.firstName}
+          onData={(_, value) => {
+            setPayload({ ...payload, firstName: value });
+          }}
+          onChange={() => {
+            setErrors({ ...errors, firstName: undefined });
+          }}
+        />
+
+        <Input
+          name="lastName"
+          label="Last Name *"
+          type="text"
+          placeholder="Smith"
+          error={errors.lastName}
+          onData={(_, value) => {
+            setPayload({ ...payload, lastName: value });
+          }}
+          onChange={() => {
+            setErrors({ ...errors, lastName: undefined });
+          }}
+        />
+      </div>
+
       <Input
         name="password"
-        label="Create Password"
+        label="Create Password *"
         type="password"
         placeholder="At least 8 characters"
         icon={{ src: IconPassword, height: 16, width: 16 }}
@@ -109,12 +146,12 @@ export const SignUpForm: React.FC<Props> = ({ action, ...props }) => {
 
       <Input
         name="confirm_password"
-        label="Confirm Password"
+        label="Confirm Password *"
         type="password"
         placeholder="At least 8 characters"
-        icon={{ src: IconPassword, height: 16, width: 16 }}
         autoComplete="current-password"
-        error={errors.confirm_password}
+        icon={{ src: IconPassword, height: 16, width: 16 }}
+        error={errors.email}
         onData={(_, value) => {
           setPayload({ ...payload, confirm_password: value });
         }}
